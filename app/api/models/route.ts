@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
             sizeFormatted: formatFileSize(stats.size),
             path: filePath,
             type: 'ONNX',
-            lastModified: stats.mtime
+            lastModified: new Date().toISOString(),
           })
         } else if (file.isFile() && (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png'))) {
           // Include test output images
@@ -45,8 +45,8 @@ export async function GET(request: NextRequest) {
             sizeFormatted: formatFileSize(stats.size),
             path: filePath,
             type: 'Test Output',
-            lastModified: stats.mtime,
-            image: `data:image/${isPng ? 'png' : 'jpeg'};base64,${imageBase64}`
+            lastModified: new Date().toISOString(),
+            image: `data:image/${isPng ? 'png' : 'jpeg'};base64,${imageBase64}`,
           })
         }
       }
@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
             name: file.name,
             type: 'TensorRT Deployment',
             files: [],
-            lastModified: new Date()
+            lastModified: new Date().toISOString(),
           }
           
           for (const subFile of subFiles) {
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
               sizeFormatted: formatFileSize(stats.size),
               path: subFilePath,
               type: getFileType(subFile.name),
-              lastModified: stats.mtime
+              lastModified: new Date().toISOString(),
             }
             
             // If it's an image, include base64 data

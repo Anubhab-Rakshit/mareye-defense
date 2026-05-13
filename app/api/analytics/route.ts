@@ -95,7 +95,8 @@ export async function GET(request: NextRequest) {
               analysisName: dir.name,
               reportData: enhancedReportData,
               graphs: graphs,
-              timestamp: reportData.timestamp || new Date().toISOString()
+              timestamp: reportData.timestamp || new Date().toISOString(),
+              analysisPath,
             })
           } catch (error) {
             console.warn(`Failed to process analysis ${dir.name}:`, error)
@@ -105,12 +106,24 @@ export async function GET(request: NextRequest) {
     }
 
     // Sort by timestamp (newest first)
-    analysisResults.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    analysisResults.sort(
+      (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    )
+
+    // Keep only latest 6 CNN reports and delete older ones
+    const limitedResults = analysisResults.slice(0, 6)
+    const staleResults = analysisResults.slice(6)
+    for (const stale of staleResults) {
+      const stalePath = resolveInsideBase(analyticsDir, stale.analysisName)
+      if (stalePath && existsSync(stalePath)) {
+        await rm(stalePath, { recursive: true, force: true })
+      }
+    }
 
     return NextResponse.json({
       success: true,
-      analyses: analysisResults,
-      totalAnalyses: analysisResults.length
+      analyses: limitedResults.map(({ analysisPath, ...rest }) => rest),
+      totalAnalyses: limitedResults.length,
     })
 
   } catch (error) {
