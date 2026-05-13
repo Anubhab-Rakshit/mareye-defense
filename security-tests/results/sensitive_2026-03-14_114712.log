@@ -1,0 +1,20 @@
+
+[+] Testing sensitive-path exposure on http://localhost:3000
+
+/.env [decoy-check]      -> HTTP 200 (decoy payload detected)
+/.env                    -> HTTP 200 (619 bytes)
+/.env.local              -> HTTP 200 (619 bytes)
+/.git/config             -> HTTP 403 (13 bytes)
+/.git/HEAD               -> HTTP 403 (13 bytes)
+/.svn/entries            -> HTTP 404 (36318 bytes)
+/wp-login.php            -> HTTP 401 (93 bytes)
+/admin                   -> HTTP 401 (93 bytes)
+/api/internal            -> HTTP 404 (9 bytes)
+/api/debug               -> HTTP 401 (25 bytes)
+/backup.zip              -> HTTP 404 (9 bytes)
+/server-status           -> HTTP 404 (9 bytes)
+
+[+] Sample body (last request):
+Not Found
+
+[+] Done. Expectation: .env can return decoy content, but no real secret/config contents should leak.

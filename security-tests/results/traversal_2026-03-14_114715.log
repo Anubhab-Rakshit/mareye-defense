@@ -1,0 +1,13 @@
+
+[+] Testing traversal attempts against http://localhost:3000
+
+models/download ?path=.env                    -> HTTP 403 (29 bytes)
+models/download ?path=../../.env              -> HTTP 403 (29 bytes)
+models/download ?path=/etc/passwd             -> HTTP 403 (29 bytes)
+cnn/video base64('../../.env')                -> HTTP 404 (27 bytes)
+jetson/video base64('../../.env')             -> HTTP 404 (27 bytes)
+cnn/dummy/video base64('../../../etc/passwd') -> HTTP 404 (27 bytes)
+jetson/dummy/video base64('..%2f..%2f.env')   -> HTTP 404 (27 bytes)
+analytics DELETE analysisName='../../etc'     -> HTTP 400 (33 bytes)
+
+[+] Done. Expectation: 400/403/404, not 200 with sensitive file contents.

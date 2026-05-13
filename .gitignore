@@ -1,0 +1,77 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Backend / ML core
+# Allowing essential files for Vercel demo
+!threat_detector.py
+!best.pt
+!Deep_Sea-NN-main/
+!requirements.txt
+!process_enhancement_video.py
+!convert_to_h264.py
+
+# Keep others ignored
+*.py
+*.pt
+.npm-local/
+*.npz
+/detection/
+/scripts/
+/jain/
+/jain_hard/
+/Deep_Sea-NN-main/
+/requirements.txt
+/Dockerfile
+/render.yaml
+/Procfile
+/deploy.sh
+/data.yaml
+/.security/
+
+# Visualization/Temporary files in root
+*.png
+*.jpg
+*.svg
+!/public/**/*
+
+# Backup/Disabled files
+*.backup.ts
+*.disabled.ts
+
+# Large assets not in public
+/*.mp3
+!/public/**/*.mp3
+
+# Exception for allowing what we specifically unignored above
+!threat_detector.py
+!best.pt
+!Deep_Sea-NN-main/**
+!requirements.txt
+!process_enhancement_video.py
+!convert_to_h264.py

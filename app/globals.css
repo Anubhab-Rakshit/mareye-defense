@@ -1,0 +1,1253 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space_Mono:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tactical Oceanic color palette with deep navy and bioluminescent cyan */
+  --background: 5 30% 10%; /* #0A1628 - Deep ocean navy */
+  --foreground: 0 0% 100%; /* White text */
+  --card: 210 40% 12%; /* #0D1B2A - Slightly lighter navy for cards */
+  --card-foreground: 0 0% 100%; /* White text on cards */
+  --popover: 210 40% 12%; /* Ocean blue popover */
+  --popover-foreground: 0 0% 100%; /* White text */
+  --primary: 180 100% 50%; /* Bright cyan - bioluminescent accent */
+  --primary-foreground: 210 50% 10%; /* Dark text on primary */
+  --secondary: 210 70% 15%; /* #1B263B - Secondary navy */
+  --secondary-foreground: 0 0% 100%; /* White text */
+  --muted: 210 40% 25%; /* Muted navy */
+  --muted-foreground: 0 0% 70%; /* Light gray text */
+  --accent: 180 100% 40%; /* Neon cyan accent */
+  --accent-foreground: 0 0% 100%; /* White on accent */
+  --destructive: 0 84% 60%; /* Red for warnings */
+  --destructive-foreground: 0 0% 100%; /* White on destructive */
+  --border: 210 50% 20%; /* Navy borders with slight transparency */
+  --input: 210 40% 15%; /* Navy input backgrounds */
+  --ring: 180 100% 50%; /* Cyan focus rings */
+  --chart-1: 180 100% 50%; /* Bright cyan */
+  --chart-2: 210 80% 55%; /* Light blue */
+  --chart-3: 180 70% 45%; /* Teal */
+  --chart-4: 200 60% 40%; /* Deeper blue */
+  --chart-5: 120 100% 50%; /* Bright green */
+  --radius: 0.75rem;
+  --sidebar: 210 50% 10%; /* Very dark navy sidebar */
+  --sidebar-foreground: 0 0% 100%; /* White sidebar text */
+  --sidebar-primary: 180 100% 50%; /* Cyan primary */
+  --sidebar-primary-foreground: 0 0% 100%; /* White text */
+  --sidebar-accent: 210 40% 20%; /* Navy accent */
+  --sidebar-accent-foreground: 180 100% 50%; /* Cyan text */
+  --sidebar-border: 210 50% 25%; /* Navy borders */
+  --sidebar-ring: 180 100% 50%; /* Cyan rings */
+}
+
+.dark {
+  /* Enhanced dark mode for tactical oceanic aesthetic */
+  --background: 210 50% 8%; /* Even deeper navy in dark mode */
+  --foreground: 0 0% 100%; /* White text */
+  --card: 210 40% 12%; /* Deep navy cards */
+  --card-foreground: 0 0% 100%; /* White card text */
+  --popover: 210 40% 12%; /* Deep ocean popovers */
+  --popover-foreground: 0 0% 100%; /* White popover text */
+  --primary: 180 100% 50%; /* Bright bioluminescent cyan */
+  --primary-foreground: 0 0% 100%; /* White text on primary */
+  --secondary: 210 70% 18%; /* Darker navy secondary */
+  --secondary-foreground: 0 0% 100%; /* White secondary text */
+  --muted: 210 40% 20%; /* Muted navy */
+  --muted-foreground: 0 0% 60%; /* Gray muted text */
+  --accent: 180 100% 45%; /* Bright cyan accent */
+  --accent-foreground: 0 0% 100%; /* White accent text */
+  --destructive: 0 84% 65%; /* Brighter red */
+  --destructive-foreground: 0 0% 100%; /* White destructive text */
+  --border: 210 50% 22%; /* Navy borders */
+  --input: 210 40% 15%; /* Deep navy inputs */
+  --ring: 180 100% 50%; /* Bright cyan focus rings */
+  --chart-1: 180 100% 50%; /* Bright cyan chart */
+  --chart-2: 210 80% 55%; /* Light blue chart */
+  --chart-3: 180 70% 50%; /* Bright teal chart */
+  --chart-4: 200 60% 45%; /* Bright deep blue chart */
+  --chart-5: 120 100% 55%; /* Bright green chart */
+  --sidebar: 210 50% 8%; /* Very dark sidebar */
+  --sidebar-foreground: 0 0% 100%; /* White sidebar text */
+  --sidebar-primary: 180 100% 50%; /* Bright cyan primary */
+  --sidebar-primary-foreground: 0 0% 100%; /* White text */
+  --sidebar-accent: 210 40% 22%; /* Navy accent */
+  --sidebar-accent-foreground: 180 100% 50%; /* Cyan text */
+  --sidebar-border: 210 50% 25%; /* Navy borders */
+  --sidebar-ring: 180 100% 50%; /* Bright cyan rings */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    /* Add tactical sonar pulse animation base */
+    position: relative;
+  }
+
+  /* Typography hierarchy with tactical fonts - Premium */
+  h1 {
+    @apply font-orbitron font-black tracking-wider text-white;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    @apply font-orbitron font-bold tracking-wider text-white;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    font-size: clamp(1.875rem, 5vw, 3rem);
+  }
+  
+  h3 {
+    @apply font-orbitron font-bold tracking-wide text-cyan-100;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+  
+  h4,
+  h5,
+  h6 {
+    @apply font-orbitron font-semibold tracking-widest text-cyan-200;
+    line-height: 1.4;
+  }
+
+  p {
+    @apply leading-relaxed text-cyan-100/80;
+  }
+
+  /* Radar sweep animation - refined for international standards */
+  @keyframes radar-sweep {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0.9;
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+      opacity: 0.9;
+    }
+  }
+
+  /* Scan line animation */
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Shimmer animation */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Gradient animation */
+  @keyframes animate-gradient {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Sonar pulse keyframe for ambient animations */
+  @keyframes sonar-pulse {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  /* Glitch text animation for tactical feel */
+  @keyframes glitch {
+    0%,
+    100% {
+      text-shadow:
+        -2px -2px 0 red,
+        2px 2px 0 blue;
+    }
+    50% {
+      text-shadow:
+        2px -2px 0 cyan,
+        -2px 2px 0 magenta;
+    }
+  }
+
+  /* Scan line animation for HUD elements */
+  @keyframes scan-lines {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 10px;
+    }
+  }
+
+  /* Shimmer glow for bioluminescent effect */
+  @keyframes shimmer-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 20px rgba(0, 217, 255, 0.4),
+        inset 0 0 20px rgba(0, 217, 255, 0.1);
+    }
+    50% {
+      box-shadow:
+        0 0 40px rgba(0, 217, 255, 0.8),
+        inset 0 0 20px rgba(0, 217, 255, 0.2);
+    }
+  }
+}
+
+@layer components {
+  /* Tactical glass morphism for card elements */
+  .tactical-glass {
+    @apply bg-slate-900/30 backdrop-blur-2xl border border-cyan-500/20 rounded-xl;
+  }
+
+  /* Holographic button base - refined for premium feel */
+  .tactical-button {
+    @apply relative font-space-mono font-bold text-sm uppercase tracking-wider py-3 px-6 rounded-lg
+           bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 
+           text-cyan-100 hover:text-cyan-50 transition-all duration-300
+           hover:shadow-lg hover:shadow-cyan-500/40 hover:border-cyan-300/80
+           active:scale-95 overflow-hidden focus:outline-none focus:ring-2 focus:ring-cyan-400/50;
+  }
+
+  /* Sonar pulse effect utility */
+  .sonar-pulse {
+    animation: sonar-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Radar sweep animation utility */
+  .radar-sweep {
+    animation: radar-sweep 3s linear infinite;
+  }
+
+  /* Scan animation utility */
+  .animate-scan {
+    animation: scan 2s linear infinite;
+  }
+
+  /* Shimmer animation utility */
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Gradient animation utility */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: animate-gradient 3s ease infinite;
+  }
+
+  /* Slow spin animation */
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  /* HUD corner brackets for tactical feel */
+  .hud-corner {
+    position: relative;
+  }
+
+  .hud-corner::before,
+  .hud-corner::after {
+    content: "";
+    position: absolute;
+    border: 2px solid hsl(var(--accent));
+    pointer-events: none;
+  }
+
+  .hud-corner::before {
+    top: -8px;
+    left: -8px;
+    width: 12px;
+    height: 12px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .hud-corner::after {
+    bottom: -8px;
+    right: -8px;
+    width: 12px;
+    height: 12px;
+    border-left: none;
+    border-top: none;
+  }
+}
+
+@layer utilities {
+  /* ====== SCROLL-TRIGGERED REVEAL ANIMATIONS ====== */
+
+  /* Fade in from below */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fade in from left */
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Fade in from right */
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Scale in */
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Fade in */
+  .reveal-fade {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-fade.visible {
+    opacity: 1;
+  }
+
+  /* Stagger delay utilities */
+  .stagger-1 {
+    transition-delay: 0.1s !important;
+  }
+  .stagger-2 {
+    transition-delay: 0.2s !important;
+  }
+  .stagger-3 {
+    transition-delay: 0.3s !important;
+  }
+  .stagger-4 {
+    transition-delay: 0.4s !important;
+  }
+  .stagger-5 {
+    transition-delay: 0.5s !important;
+  }
+  .stagger-6 {
+    transition-delay: 0.6s !important;
+  }
+  .stagger-7 {
+    transition-delay: 0.7s !important;
+  }
+  .stagger-8 {
+    transition-delay: 0.8s !important;
+  }
+
+  /* ====== PREMIUM HOVER EFFECTS ====== */
+
+  /* Magnetic hover lift */
+  .hover-lift {
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.4s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px -15px rgba(6, 182, 212, 0.3);
+  }
+
+  /* Glow pulse on hover */
+  .hover-glow {
+    transition:
+      box-shadow 0.4s ease,
+      border-color 0.4s ease;
+  }
+  .hover-glow:hover {
+    box-shadow:
+      0 0 30px rgba(6, 182, 212, 0.4),
+      0 0 60px rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.6);
+  }
+
+  /* Shimmer sweep on hover - enhanced */
+  .hover-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .hover-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hover-shimmer:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* Smooth scale on hover - new */
+  .hover-scale {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+
+  /* Subtle border pulse - new */
+  .hover-border-pulse {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-border-pulse:hover {
+    border-color: rgba(6, 182, 212, 0.8);
+    box-shadow: inset 0 0 12px rgba(6, 182, 212, 0.1);
+  }
+
+  /* ====== TACTICAL GLOW EFFECTS ====== */
+
+  .glow-cyan {
+    box-shadow:
+      0 0 15px rgba(6, 182, 212, 0.3),
+      0 0 45px rgba(6, 182, 212, 0.1);
+  }
+
+  .glow-blue {
+    box-shadow:
+      0 0 15px rgba(59, 130, 246, 0.3),
+      0 0 45px rgba(59, 130, 246, 0.1);
+  }
+
+  .glow-emerald {
+    box-shadow:
+      0 0 15px rgba(16, 185, 129, 0.3),
+      0 0 45px rgba(16, 185, 129, 0.1);
+  }
+
+  /* Text glow */
+  .text-glow-cyan {
+    text-shadow:
+      0 0 10px rgba(6, 182, 212, 0.5),
+      0 0 30px rgba(6, 182, 212, 0.2);
+  }
+
+  .text-glow-blue {
+    text-shadow:
+      0 0 10px rgba(59, 130, 246, 0.5),
+      0 0 30px rgba(59, 130, 246, 0.2);
+  }
+
+  /* ====== GLASSMORPHISM VARIANTS ====== */
+
+  .glass-heavy {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+  }
+
+  .glass-light {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(6, 182, 212, 0.1);
+  }
+
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.6) 0%,
+      rgba(15, 23, 42, 0.4) 100%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+  }
+
+  /* ====== GRADIENT TEXT ====== */
+
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, #67e8f9, #22d3ee, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-ocean {
+    background: linear-gradient(135deg, #67e8f9, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ====== ANIMATED BORDERS ====== */
+
+  .border-glow-animate {
+    position: relative;
+  }
+  .border-glow-animate::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      var(--border-angle, 0deg),
+      transparent 40%,
+      rgba(6, 182, 212, 0.6) 50%,
+      transparent 60%
+    );
+    z-index: -1;
+    animation: border-rotate 4s linear infinite;
+  }
+
+  @keyframes border-rotate {
+    to {
+      --border-angle: 360deg;
+    }
+  }
+
+  @property --border-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+}
+
+@layer base {
+  /* ====== ADDITIONAL KEYFRAMES ====== */
+
+  /* Float animation */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-20px);
+      opacity: 0.6;
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+    }
+    50% {
+      box-shadow:
+        0 0 40px rgba(6, 182, 212, 0.5),
+        0 0 80px rgba(6, 182, 212, 0.2);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Slide in up */
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Ripple effect */
+  @keyframes ripple {
+    0% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  .animate-ripple {
+    animation: ripple 2s ease-out infinite;
+  }
+
+  /* Data stream animation */
+  @keyframes data-stream {
+    0% {
+      transform: translateY(-100%) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(20px);
+      opacity: 0;
+    }
+  }
+
+  .animate-data-stream {
+    animation: data-stream 4s linear infinite;
+  }
+
+  /* Enhanced focus states for inputs and interactive elements */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid rgba(6, 182, 212, 0.5);
+    outline-offset: 2px;
+  }
+
+  /* Smooth color transitions on state changes */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  /* Premium link hover effect */
+  a:not(.no-underline) {
+    position: relative;
+  }
+  a:not(.no-underline)::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  a:not(.no-underline):hover::after {
+    width: 100%;
+  }
+
+  /* Tactical flicker */
+  @keyframes tactical-flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    93% {
+      opacity: 0.3;
+    }
+    94% {
+      opacity: 1;
+    }
+    96% {
+      opacity: 0.5;
+    }
+    97% {
+      opacity: 1;
+    }
+  }
+
+  .animate-flicker {
+    animation: tactical-flicker 5s linear infinite;
+  }
+}
+
+/* ====== SMOOTH SCROLL ====== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ====== SUBMARINE INTERIOR ANIMATIONS ====== */
+
+/* Pressure warning pulse */
+@keyframes pressure-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+.animate-pressure-pulse {
+  animation: pressure-pulse 4s ease-in-out infinite;
+}
+
+/* Submarine periscope rotation */
+@keyframes periscope-sweep {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}
+.animate-periscope {
+  animation: periscope-sweep 8s ease-in-out infinite;
+}
+
+/* Torpedo tube ready blink */
+@keyframes ready-blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  85%,
+  95% {
+    opacity: 0.8;
+  }
+}
+.animate-ready-blink {
+  animation: ready-blink 3s ease infinite;
+}
+
+/* Depth gauge needle wobble */
+@keyframes gauge-wobble {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+}
+.animate-gauge-wobble {
+  animation: gauge-wobble 6s ease-in-out infinite;
+}
+
+/* Sonar ping expanding ring */
+@keyframes sonar-ring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+.animate-sonar-ring {
+  animation: sonar-ring 3s ease-out infinite;
+}
+
+/* Data terminal scroll */
+@keyframes terminal-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.animate-terminal-scroll {
+  animation: terminal-scroll 20s linear infinite;
+}
+
+/* Bulkhead warning flash */
+@keyframes bulkhead-flash {
+  0%,
+  90%,
+  100% {
+    background-color: rgba(6, 182, 212, 0.03);
+  }
+  93%,
+  97% {
+    background-color: rgba(6, 182, 212, 0.08);
+  }
+}
+.animate-bulkhead-flash {
+  animation: bulkhead-flash 8s linear infinite;
+}
+
+/* Hull creak vibration */
+@keyframes hull-vibrate {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(0.3px);
+  }
+  75% {
+    transform: translateX(-0.3px);
+  }
+}
+.animate-hull-vibrate {
+  animation: hull-vibrate 0.1s linear infinite;
+  animation-play-state: paused;
+}
+.animate-hull-vibrate:hover {
+  animation-play-state: running;
+}
+
+/* Screen glitch effect */
+@keyframes screen-glitch {
+  0%,
+  95%,
+  100% {
+    transform: translate(0, 0) skewX(0);
+    filter: none;
+  }
+  96% {
+    transform: translate(2px, -1px) skewX(0.5deg);
+    filter: hue-rotate(90deg);
+  }
+  97% {
+    transform: translate(-1px, 1px) skewX(-0.3deg);
+    filter: hue-rotate(-90deg);
+  }
+  98% {
+    transform: translate(1px, 0) skewX(0);
+    filter: saturate(2);
+  }
+}
+.animate-screen-glitch {
+  animation: screen-glitch 10s linear infinite;
+}
+
+/* Submarine ambient hum glow */
+@keyframes ambient-hum {
+  0%,
+  100% {
+    box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.02);
+  }
+  50% {
+    box-shadow: inset 0 0 60px rgba(6, 182, 212, 0.05);
+  }
+}
+.animate-ambient-hum {
+  animation: ambient-hum 5s ease-in-out infinite;
+}
+
+/* Control panel button press */
+@keyframes btn-press {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(6, 182, 212, 0.2),
+      inset 0 0 4px rgba(6, 182, 212, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(6, 182, 212, 0.4),
+      inset 0 0 8px rgba(6, 182, 212, 0.2);
+  }
+}
+.animate-btn-press:hover {
+  animation: btn-press 0.6s ease-in-out infinite;
+}
+
+/* Underwater caustics shimmer */
+@keyframes caustics {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.animate-caustics {
+  background-image:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(6, 182, 212, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 50%,
+      rgba(59, 130, 246, 0.02) 0%,
+      transparent 50%
+    );
+  background-size: 200% 200%;
+  animation: caustics 12s ease-in-out infinite;
+}
+
+/* ====== CLASSIFIED SECURITY BAR ====== */
+.classified-bar {
+  background: linear-gradient(
+    90deg,
+    #dc2626 0%,
+    #b91c1c 25%,
+    #dc2626 50%,
+    #b91c1c 75%,
+    #dc2626 100%
+  );
+  background-size: 200% 100%;
+  animation: classified-scroll 8s linear infinite;
+  color: #fff;
+  font-family: var(--font-orbitron), monospace;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 6px 0;
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.classified-bar::before,
+.classified-bar::after {
+  content: "◆";
+  margin: 0 12px;
+  opacity: 0.7;
+}
+
+@keyframes classified-scroll {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+/* Security clearance badge */
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  border-radius: 4px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fca5a5;
+}
+
+/* Secure access watermark */
+@keyframes watermark-drift {
+  0% {
+    transform: rotate(-15deg) translateX(-10%);
+  }
+  50% {
+    transform: rotate(-15deg) translateX(10%);
+  }
+  100% {
+    transform: rotate(-15deg) translateX(-10%);
+  }
+}
+.security-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-family: var(--font-orbitron), monospace;
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(6, 182, 212, 0.015);
+  letter-spacing: 0.3em;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  animation: watermark-drift 30s ease-in-out infinite;
+  user-select: none;
+}
+
+/* Security perimeter border animation */
+@keyframes perimeter-scan {
+  0% {
+    clip-path: polygon(0 0, 2% 0, 2% 100%, 0 100%);
+  }
+  25% {
+    clip-path: polygon(0 0, 100% 0, 100% 2%, 0 2%);
+  }
+  50% {
+    clip-path: polygon(98% 0, 100% 0, 100% 100%, 98% 100%);
+  }
+  75% {
+    clip-path: polygon(0 98%, 100% 98%, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 2% 0, 2% 100%, 0 100%);
+  }
+}
+.security-perimeter {
+  position: fixed;
+  inset: 0;
+  border: 2px solid rgba(6, 182, 212, 0.3);
+  pointer-events: none;
+  z-index: 2;
+}
+.security-perimeter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(6, 182, 212, 0.8);
+  animation: perimeter-scan 6s linear infinite;
+}
+
+/* Encrypted data stream effect */
+@keyframes encrypt-flow {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Access level indicator */
+.access-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  font-family: var(--font-space-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.access-level-top-secret {
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.5);
+  color: #fca5a5;
+}
+.access-level-secret {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fcd34d;
+}
+.access-level-classified {
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  color: #67e8f9;
+}
+
+/* ====== ACCESSIBILITY - REDUCED MOTION ====== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ====== PREMIUM NEW ANIMATIONS ====== */
+
+/* Premium slide down entrance */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.8s ease-out forwards;
+}
+
+/* Premium fade in blur effect */
+@keyframes fade-in-blur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.animate-fade-in-blur {
+  animation: fade-in-blur 0.6s ease-out;
+}
+
+/* Premium scale pulse */
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Premium glow effect */
+@keyframes glow-pulse-new {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.5), 0 0 60px rgba(6, 182, 212, 0.2);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse-new 3s ease-in-out infinite;
+}
+
+/* Premium tilt effect on hover */
+.hover-tilt {
+  perspective: 1000px;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.hover-tilt:hover {
+  transform: rotateX(5deg) rotateY(-5deg) scale(1.02);
+}
+
+/* Premium blur-in animation */
+@keyframes blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(20px);
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.animate-blur-in {
+  animation: blur-in 0.8s ease-out;
+}
+
+/* Duration 4s pulse for gradients */
+@keyframes pulse-4s {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse.duration-4000 {
+  animation: pulse-4s 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ====== CUSTOM SCROLLBAR ====== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.5);
+}
+
+/* ====== SELECTION COLORS ====== */
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #fff;
+}
+
+@supports (font-variation-settings: normal) {
+  body {
+    font-family:
+      var(--font-space-mono),
+      system-ui,
+      -apple-system;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family:
+      var(--font-orbitron),
+      system-ui,
+      -apple-system;
+  }
+}

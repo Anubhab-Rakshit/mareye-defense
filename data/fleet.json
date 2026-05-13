@@ -1,0 +1,90 @@
+{
+  "vessels": [
+    {
+      "id": "INS-VIKRANT-001",
+      "name": "INS Vikrant",
+      "class": "Aircraft Carrier",
+      "lat": 15.3173,
+      "lng": 73.9862,
+      "status": "PATROLLING",
+      "heading": 45,
+      "speed_knots": 18,
+      "zone": "Arabian Sea - Sector 7",
+      "crew": 1600,
+      "last_updated": "2026-04-26T12:00:00Z"
+    },
+    {
+      "id": "INS-KOLKATA-002",
+      "name": "INS Kolkata",
+      "class": "Destroyer (D63)",
+      "lat": 18.975,
+      "lng": 72.8258,
+      "status": "PATROLLING",
+      "heading": 270,
+      "speed_knots": 22,
+      "zone": "Arabian Sea - Sector 5",
+      "crew": 350,
+      "last_updated": "2026-04-26T12:00:00Z"
+    },
+    {
+      "id": "INS-CHENNAI-003",
+      "name": "INS Chennai",
+      "class": "Destroyer (D65)",
+      "lat": 12.9141,
+      "lng": 74.856,
+      "status": "PATROLLING",
+      "heading": 180,
+      "speed_knots": 20,
+      "zone": "Lakshadweep Sea - Sector 3",
+      "crew": 350,
+      "last_updated": "2026-04-26T12:00:00Z"
+    },
+    {
+      "id": "INS-SAHYADRI-004",
+      "name": "INS Sahyadri",
+      "class": "Frigate (F49)",
+      "lat": 20.5937,
+      "lng": 68.9629,
+      "status": "PATROLLING",
+      "heading": 90,
+      "speed_knots": 25,
+      "zone": "Arabian Sea - Sector 9",
+      "crew": 250,
+      "last_updated": "2026-04-26T12:00:00Z"
+    },
+    {
+      "id": "INS-VISAKHAPATNAM-005",
+      "name": "INS Visakhapatnam",
+      "class": "Destroyer (D66)",
+      "lat": 10.8505,
+      "lng": 76.2711,
+      "status": "PATROLLING",
+      "heading": 315,
+      "speed_knots": 21,
+      "zone": "Laccadive Sea - Sector 2",
+      "crew": 350,
+      "last_updated": "2026-04-26T12:00:00Z"
+    }
+  ],
+  "active_threats": [
+    {
+      "id": "THREAT-DELTA-9",
+      "classification": "UNAUTHORIZED SUBSURFACE CONTACT (AKULA-CLASS)",
+      "lat": 14.2,
+      "lng": 73.1,
+      "detected_at": "2026-04-26T12:08:00Z"
+    }
+  ],
+  "audit_log": [
+    {
+      "event": "SYSTEM_BOOT",
+      "timestamp": "2026-04-26T10:00:00Z",
+      "details": "MarEye A.I.R Commander core initialized. Neural engine connected to tactical link."
+    },
+    {
+      "event": "THREAT_DETECTION",
+      "timestamp": "2026-04-26T12:08:00Z",
+      "details": "Sonar buoy array in Sector 7 detected anomalous acoustic signature. Classified as Akula-class submarine."
+    }
+  ]
+}
