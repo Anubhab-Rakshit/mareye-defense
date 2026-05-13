@@ -15,9 +15,7 @@ Uses **native Stellar ManageData operations** to log AI decisions immutably to t
 
 ## Environment Variables
 
-```bash
-STELLAR_AGENT_SECRET=SCNMOOYP6PON2VWNPQKECL6M7ZX2BJXUUJDJYL2TQYRCQ6HW6WO5K5UX
-```
+
 
 ## Usage
 
