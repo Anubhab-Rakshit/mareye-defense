@@ -77,4 +77,3 @@ Marine Security is an advanced, AI-powered maritime defense and surveillance pla
 
 ---
 
-*Designed and developed by Anubhab Rakshit for the Hack Among Us Hackathon.*
