@@ -51,6 +51,9 @@ Marine Security is an advanced, AI-powered maritime defense and surveillance pla
 - **JWT Session Tokens:** Secure, HTTP-only cookie-based authentication.
 - **Middleware Protections:** Strict route guarding forcing unauthenticated users back to the landing/demo paths.
 - **Decoys & Telemetry:** Integrated honeypot routes feed directly into an admin-only security console for real-time attack analysis.
+- **Blockchain Audit Privacy:** Only salted hashes are written on-chain; raw coordinates remain server-side.
+- **Agent Wallet Signing:** Blockchain writes are signed by a backend Stellar agent key.
+- **Role-Based Access:** Commander-only access to raw coordinates; all others receive redacted intel.
 
 ---
 
@@ -65,6 +68,7 @@ Marine Security is an advanced, AI-powered maritime defense and surveillance pla
    pip install -r requirements.txt
    ```
 3. Copy `.env.local` to your environment (ensure `MONGODB_URI`, `JWT_SECRET`, and `GROQ_API_KEY` are set).
+   - Add `LEDGER_SALT`, `STELLAR_AGENT_SECRET`, and `COMMANDER_EMAILS` for blockchain audit logging + commander access.
 4. Run the development server:
    ```bash
    npm run dev

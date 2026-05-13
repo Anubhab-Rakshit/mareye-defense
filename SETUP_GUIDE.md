@@ -44,6 +44,9 @@ MONGODB_URI=mongodb://127.0.0.1:27017/mareye
 JWT_SECRET=replace_with_a_long_random_secret
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 EMAIL_DISABLE=true
+LEDGER_SALT=replace_with_strong_random_salt
+STELLAR_AGENT_SECRET=replace_with_stellar_testnet_secret
+COMMANDER_EMAILS=admin@gmail.com
 
 # Optional AI keys
 # GROK_API_KEY=your_api_key_here
@@ -96,9 +99,5 @@ pip install -r requirements.txt --force-reinstall
 
 ---
 
-## 📞 Support
-
-- Email: aochuba52@gmail.com
-- Phone: 8900007125
 
 **Happy coding! 🌊**

@@ -13,10 +13,13 @@ NODE_ENV=production
 PORT=10000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secure_random_secret
-GROQ_API_KEY=your_groq_api_key
-PYTHON_EXEC=python3
-EMAIL_DISABLE=true
-NEXT_PUBLIC_BASE_URL=https://your-app-name.onrender.com
+  GROQ_API_KEY=your_groq_api_key
+  PYTHON_EXEC=python3
+  EMAIL_DISABLE=true
+  NEXT_PUBLIC_BASE_URL=https://your-app-name.onrender.com
+  LEDGER_SALT=your_strong_random_salt
+  STELLAR_AGENT_SECRET=your_stellar_testnet_secret
+  COMMANDER_EMAILS=admin@gmail.com
 ```
 
 ### 3. GitHub Repository
@@ -110,6 +113,4 @@ To update after code changes:
 - Push to GitHub
 - Render will auto-deploy if `autoDeploy: true` is set
 - Or manually trigger deployment from Render dashboard
-
-
 

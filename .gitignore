@@ -45,6 +45,7 @@ next-env.d.ts
 /scripts/
 /jain/
 /jain_hard/
+/hardware_scripts/
 /Deep_Sea-NN-main/
 /requirements.txt
 /Dockerfile

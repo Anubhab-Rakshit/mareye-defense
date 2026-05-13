@@ -11,6 +11,36 @@ function getClientIpMw(request: NextRequest): string {
   return "unknown";
 }
 
+// ── LEAKY BUCKET RATE LIMITER (DoS/DDoS Protection) ──
+interface Bucket {
+  tokens: number;
+  lastUpdated: number;
+}
+const leakyBucket = new Map<string, Bucket>();
+const BUCKET_CAPACITY = 15; // Max burst of 15 requests
+const REFILL_RATE = 1; // Refill 1 token per second
+
+function checkRateLimit(ip: string): boolean {
+  if (ip === "unknown") return true;
+
+  const now = Date.now();
+  const bucket = leakyBucket.get(ip) || { tokens: BUCKET_CAPACITY, lastUpdated: now };
+  
+  // Refill tokens based on time passed (leaky bucket mechanism)
+  const timePassedSeconds = (now - bucket.lastUpdated) / 1000;
+  bucket.tokens = Math.min(BUCKET_CAPACITY, bucket.tokens + timePassedSeconds * REFILL_RATE);
+  bucket.lastUpdated = now;
+
+  if (bucket.tokens >= 1) {
+    bucket.tokens -= 1; // Consume a token
+    leakyBucket.set(ip, bucket);
+    return true; // Request allowed
+  }
+  
+  return false; // Bucket is empty, request rate limited
+}
+
+
 const honeypotDecoyPrefixes = [
   "/admin",
   "/administrator",
@@ -100,9 +130,28 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const authToken = request.cookies.get("auth_token")?.value;
   const honeypotEnabled = process.env.HONEYPOT_ENABLED !== "false";
+  const clientIp = getClientIpMw(request);
+
+  // ── RATE LIMITING: Leaky Bucket DoS Protection ──
+  const isLocalhost = clientIp === "::1" || clientIp === "127.0.0.1";
+  if (
+    clientIp !== "unknown" &&
+    !isLocalhost &&
+    process.env.NODE_ENV === "production" &&
+    !pathname.startsWith("/_next") &&
+    !pathname.startsWith("/favicon")
+  ) {
+    const isAllowed = checkRateLimit(clientIp);
+    if (!isAllowed) {
+      console.warn(`[RATE LIMIT] Dropped DoS/burst traffic from IP: ${clientIp}`);
+      return new NextResponse(
+        '<html><body style="background:#0a0a0a;color:#ff3333;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0"><div style="text-align:center"><h1>⚠️ TOO MANY REQUESTS</h1><p>Our Leaky Bucket algorithm detected anomalous traffic patterns.</p><p style="color:#666">Please wait a moment before trying again.</p></div></body></html>',
+        { status: 429, headers: { "content-type": "text/html; charset=utf-8", "Retry-After": "5" } }
+      );
+    }
+  }
 
   // ── IP Firewall: block banned hackers ──
-  const clientIp = getClientIpMw(request);
   if (
     clientIp !== "unknown" &&
     isIpBlockedInMemory(clientIp) &&

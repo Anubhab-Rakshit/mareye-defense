@@ -1,14 +1,43 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { authorizeCommander } from '@/lib/role-guard';
 
 const FLEET_DB = path.join(process.cwd(), 'data', 'fleet.json');
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const raw = fs.readFileSync(FLEET_DB, 'utf-8');
     const data = JSON.parse(raw);
-    return NextResponse.json(data);
+    const commander = await authorizeCommander(request);
+
+    if (!commander.ok) {
+      const redactedThreats = Array.isArray(data.active_threats)
+        ? data.active_threats.map((threat: any) => ({
+            ...threat,
+            lat: 0,
+            lng: 0,
+            location: 'Classified Sector',
+          }))
+        : [];
+
+      const redactedVessels = Array.isArray(data.vessels)
+        ? data.vessels.map((v: any) => ({
+            ...v,
+            lat: 0,
+            lng: 0,
+          }))
+        : [];
+
+      return NextResponse.json({
+        ...data,
+        vessels: redactedVessels,
+        active_threats: redactedThreats,
+        redacted: true,
+      });
+    }
+
+    return NextResponse.json({ ...data, redacted: false });
   } catch (e) {
     return NextResponse.json({ error: 'Fleet DB read error' }, { status: 500 });
   }

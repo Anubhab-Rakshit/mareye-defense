@@ -71,88 +71,20 @@ export default function AirCommanderPage() {
         </div>
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 overflow-hidden min-h-0">
-          {/* Left Column: Map & Status */}
-          <div className="lg:col-span-8 flex flex-col gap-6 overflow-hidden min-h-0">
-            {/* Map Panel */}
-            <div className="relative group flex-shrink-0">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-              <div className="relative bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="p-3 border-b border-white/5 flex items-center justify-between bg-slate-900/60">
-                  <div className="flex items-center gap-2">
-                    <Radar className="w-4 h-4 text-cyan-400" />
-                    <span className="text-[10px] font-orbitron tracking-wider">LIVE THEATRE VISUALIZATION</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-[9px] font-space-mono text-slate-400">
-                    <span className="flex items-center gap-1.5"><Ship className="w-3 h-3 text-emerald-400" /> {fleetData?.vessels?.length || 0} ASSETS</span>
-                    <span className="flex items-center gap-1.5 text-red-400"><AlertTriangle className="w-3 h-3" /> {fleetData?.active_threats?.length || 0} THREATS</span>
-                  </div>
-                </div>
-                <div className="h-[400px] w-full">
-                  <AirCommanderMap fleetData={fleetData} />
-                </div>
-              </div>
-            </div>
-
-            {/* Vessel Status Table */}
-            <div className="bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl p-4 flex-1 overflow-hidden flex flex-col min-h-0">
-              <div className="flex items-center gap-2 mb-4">
-                <Database className="w-4 h-4 text-cyan-400" />
-                <span className="text-[10px] font-orbitron tracking-wider">FLEET OPERATIONAL STATUS</span>
-              </div>
-              <div className="overflow-y-auto flex-1 custom-scrollbar">
-                <table className="w-full text-left text-[11px]">
-                  <thead className="text-slate-500 border-b border-white/5 font-space-mono sticky top-0 bg-[#020813]/80 backdrop-blur-md z-10">
-                    <tr>
-                      <th className="pb-2 font-medium">VESSEL</th>
-                      <th className="pb-2 font-medium">STATUS</th>
-                      <th className="pb-2 font-medium">POSITION</th>
-                      <th className="pb-2 font-medium text-right">ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {fleetData?.vessels?.map((v: any) => (
-                      <tr key={v.id} className="group hover:bg-white/5 transition-colors">
-                        <td className="py-2.5 pr-4">
-                          <div className="font-bold text-white group-hover:text-cyan-400 transition-colors">{v.name}</div>
-                          <div className="text-[9px] text-slate-500">{v.class}</div>
-                        </td>
-                        <td className="py-2.5 pr-4">
-                          <span className={`px-2 py-0.5 rounded-full border text-[9px] ${
-                            v.status === "PATROLLING" 
-                              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" 
-                              : "bg-red-500/10 border-red-500/20 text-red-400 animate-pulse"
-                          }`}>
-                            {v.status}
-                          </span>
-                        </td>
-                        <td className="py-2.5 pr-4 font-space-mono text-slate-400">
-                          {v.lat.toFixed(2)}°N, {v.lng.toFixed(2)}°E
-                        </td>
-                        <td className="py-2.5 text-right">
-                          <button className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 decoration-cyan-500/30">DETAILS</button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Audit Log & Agent Console */}
-          <div className="lg:col-span-4 flex flex-col gap-6 overflow-hidden min-h-0">
-            {/* Agent Console */}
-            <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-2xl flex-shrink-0 h-[400px]">
-              <div className="p-3 border-b border-white/5 bg-slate-900/40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden min-h-0">
+          
+          {/* Left/Main Column: Agent Console */}
+          <div className="flex flex-col gap-6 overflow-hidden min-h-0 h-full">
+            <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-2xl flex-1">
+              <div className="p-4 border-b border-white/5 bg-slate-900/40">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
-                    <span className="text-[10px] font-orbitron text-cyan-400 tracking-widest uppercase">Agent Console</span>
+                  <div className="flex items-center gap-3">
+                    <Lock className="w-5 h-5 text-cyan-400" />
+                    <span className="text-sm font-orbitron text-cyan-400 tracking-widest uppercase font-bold">Agentic Interface</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 rounded-full bg-cyan-400 animate-ping" />
-                    <span className="text-[8px] font-space-mono text-cyan-400/60">SECURE</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                    <span className="text-[10px] font-space-mono text-cyan-400/60 uppercase tracking-widest">SECURE LINK ESTABLISHED</span>
                   </div>
                 </div>
               </div>
@@ -160,9 +92,12 @@ export default function AirCommanderPage() {
                 <AirCommanderTerminal />
               </div>
             </div>
+          </div>
 
+          {/* Right Column: Blockchain Audit Log & Mini-Fleet Status */}
+          <div className="flex flex-col gap-6 overflow-hidden min-h-0">
             {/* Blockchain Audit Log */}
-            <div className="bg-slate-950/80 backdrop-blur-xl border border-white/5 rounded-2xl p-4 flex flex-col flex-1 overflow-hidden min-h-0">
+            <div className="bg-slate-950/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6 flex flex-col flex-1 overflow-hidden min-h-0 shadow-2xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <FileText className="w-4 h-4 text-cyan-400" />

@@ -413,8 +413,36 @@ function generateIntelBrief(zones: any[]) {
   return brief;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const targetLat = searchParams.get("lat");
+    const targetLon = searchParams.get("lng") || searchParams.get("lon");
+
+    if (targetLat && targetLon) {
+      // Dynamic single-point lookup for Agentic Workflow
+      const [marineData, weatherData] = await Promise.all([
+        fetchBatchMarineData(targetLat, targetLon),
+        fetchBatchWeatherData(targetLat, targetLon),
+      ]);
+
+      const marine = marineData ? marineData[0] : null;
+      const weather = weatherData ? weatherData[0] : null;
+
+      const threat = calculateThreatLevel(marine, weather);
+      const ops = calculateOpsReadiness(marine, weather);
+
+      return NextResponse.json({
+        name: "Tactical Target Area",
+        lat: parseFloat(targetLat),
+        lon: parseFloat(targetLon),
+        marine,
+        weather,
+        threat,
+        ops,
+      });
+    }
+
     const lats = NAVAL_ZONES.map((z) => z.lat).join(",");
     const lons = NAVAL_ZONES.map((z) => z.lon).join(",");
 

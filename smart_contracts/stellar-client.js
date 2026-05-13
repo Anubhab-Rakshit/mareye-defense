@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 const { Keypair, TransactionBuilder, Account, Operation, Memo, Networks } = require("@stellar/stellar-sdk");
-const crypto = require("crypto");
 
 const HORIZON_URL = "https://horizon-testnet.stellar.org";
 const NETWORK_PASSPHRASE = Networks.TESTNET;
-const AGENT_SECRET = process.env.STELLAR_AGENT_SECRET || "SCNMOOYP6PON2VWNPQKECL6M7ZX2BJXUUJDJYL2TQYRCQ6HW6WO5K5UX";
+const AGENT_SECRET = process.env.STELLAR_AGENT_SECRET || "";
 
 async function submitTransaction(envelopeXdr) {
+  const params = new URLSearchParams({ tx: envelopeXdr });
   const res = await fetch(`${HORIZON_URL}/transactions`, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `tx=${envelopeXdr}`,
+    body: params.toString(),
   });
   return res.json();
 }
@@ -21,9 +21,14 @@ async function getAccountSeq(pubKey) {
   return data.sequence;
 }
 
-async function logAIDecision(threatClass, decisionMatrix, evidenceData) {
+async function logAIDecision(threatClass, decisionMatrix, evidenceHash) {
+  if (!AGENT_SECRET) {
+    throw new Error("STELLAR_AGENT_SECRET is not configured");
+  }
+  if (!evidenceHash || evidenceHash.length !== 64) {
+    throw new Error("evidenceHash must be a 64-char hex string");
+  }
   const payer = Keypair.fromSecret(AGENT_SECRET);
-  const evidenceHash = crypto.createHash("sha256").update(evidenceData).digest("hex");
   
   console.log("Logging AI decision...");
   console.log("  Threat Class:", threatClass);
@@ -55,13 +60,11 @@ async function logAIDecision(threatClass, decisionMatrix, evidenceData) {
       name: `agent_${timestamp}`,
       value: payer.publicKey(),
     }))
-    .addMemo(Memo.hash(evidenceHash))
+    .addMemo(Memo.hash(Buffer.from(evidenceHash, "hex")))
     .build();
 
   transaction.sign(payer);
-  const envelopeXdr = Buffer.isBuffer(transaction.toEnvelope().toXDR()) 
-    ? transaction.toEnvelope().toXDR().toString("base64")
-    : transaction.toEnvelope().toXDR();
+  const envelopeXdr = transaction.toEnvelope().toXDR("base64");
   
   const result = await submitTransaction(envelopeXdr);
   

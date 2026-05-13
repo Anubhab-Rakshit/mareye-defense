@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import crypto from "crypto";
 import { logAIDecision } from "../stellar-client";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -6,14 +7,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { threatClass, decisionMatrix, evidenceData } = req.body;
+  const { threatClass, decisionMatrix, evidenceData, evidenceHash } = req.body;
 
-  if (!threatClass || !decisionMatrix || !evidenceData) {
+  if (!threatClass || !decisionMatrix || (!evidenceData && !evidenceHash)) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
   try {
-    const result = await logAIDecision(threatClass, decisionMatrix, evidenceData);
+    const finalHash =
+      typeof evidenceHash === "string" && evidenceHash.length > 0
+        ? evidenceHash
+        : crypto.createHash("sha256").update(String(evidenceData)).digest("hex");
+    const result = await logAIDecision(threatClass, decisionMatrix, finalHash);
     res.status(200).json({ 
       success: true, 
       txHash: result.hash,
